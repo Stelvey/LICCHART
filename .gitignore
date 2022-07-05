@@ -1,0 +1,6 @@
+__pycache__/
+venv/
+env/
+api.key
+*.csv
+*.mp4
