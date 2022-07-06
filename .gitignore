@@ -1,6 +1,10 @@
 __pycache__/
 venv/
 env/
+
+dist/
+licchart.egg-info/
+
 api.key
 *.csv
 *.mp4

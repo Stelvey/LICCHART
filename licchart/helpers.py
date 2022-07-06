@@ -18,7 +18,7 @@ def catcher(code):
     }
     try:
         if code in codes:
-            return codes[code]
+            return 'Error: ' + codes[code]
     except:
         return None
 

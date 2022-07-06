@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "licchart"
+description = "A Last.fm Bar Chart Race Maker"
+readme = "README.md"
+version = "v2"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "bar-chart-race",
+    "cutlet",
+    "regex",
+    "requests",
+    "unidic-lite",
+]
+
+[tool.setuptools.packages]
+find = {}  # Scan the project directory with the default parameters
+
+[project.scripts]
+licchart = "licchart.app:licchart"
+
+[project.urls]
+"Homepage" = "https://github.com/Stelvey/LICCHART"
+"Bug Tracker" = "https://github.com/Stelvey/LICCHART/issues"
