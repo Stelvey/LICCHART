@@ -2,9 +2,9 @@
 
 # **LICCHART**
 
-<img src="https://github.com/Stelvey/LICCHART/blob/main/favicon.ico" width="125">
+<img src="https://raw.githubusercontent.com/Stelvey/LICCHART/main/favicon.ico" width="125">
 
-## A CLI tool to make [Last.fm](https://www.last.fm/) bar chart race animations
+### A CLI tool to make [Last.fm](https://www.last.fm/) bar chart race animations
 
 <br>
 
@@ -78,9 +78,9 @@ pip install --upgrade licchart
 ```
 licchart username
 ```
-### Once it's complete, you will see your generated video and CSV in a current directory
+Once it's complete, you will see your generated video and CSV in a current directory
 
-### CSV file reduces time of your next data fetch
+CSV file reduces time of your next data fetch
 
 <br>
 
