@@ -85,7 +85,12 @@ licchart --api KEY
 
 ## **Uninstalling**
 
+Uninstall [LICCHART](https://github.com/Stelvey/LICCHART)
+```
+pip uninstall licchart
+```
 
+Uninstall dependencies with package manager you used to install them
 
 <br>
 
