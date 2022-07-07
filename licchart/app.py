@@ -3,17 +3,17 @@ from matplotlib import pyplot as plt
 import bar_chart_race as bcr
 import argparse
 import sys
-from licchart.helpers import catcher, dataperiod, datatodf, fetch, update
+from licchart.helpers import catcher, dataperiod, datatodf, fetch, internetcheck, update, getjson, apichecker
 import dateutil.parser
 import regex as re
 
 def licchart():
     parser = argparse.ArgumentParser(description='A Last.fm Bar Chart Race Maker.', epilog='Visit https://github.com/Stelvey/LICCHART/ for more info.')
-    parser.add_argument('-v', '--version', help='print out current version', action='version', version='LICCHART 0.0.3')
+    parser.add_argument('-v', '--version', help='print out current version and exit', action='version', version='LICCHART 0.0.4')
 
     parser.add_argument('source', help='str: your last.fm username or csv filename', nargs='?')
 
-    parser.add_argument('-a', '--api', help='str: add/change custom api key', metavar='KEY')
+    parser.add_argument('-a', '--api', help='str: add/change custom api key and exit', metavar='KEY')
 
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-m', '--months', help='takes less time to generate, but gives a less accurate result (default)', action='store_true')
@@ -28,14 +28,22 @@ def licchart():
 
     args = parser.parse_args()
 
+    # Check internet
+    if internetcheck():
+        sys.exit(catcher(internetcheck()))
+
     # Some default chart values
     type = 'months'
     length = None
 
     # API input
     if args.api:
+        rawjson = getjson({'api_key': args.api})
+        if apichecker(rawjson) == 6:
+            sys.exit(catcher(5))
         with open('api.key', 'w', encoding="utf-8") as f:
             f.write(args.api)
+        return print('API key changed successfully')
     try:
         with open('api.key', 'r', encoding="utf-8") as f:
             api = f.read()
@@ -101,14 +109,14 @@ def licchart():
             sys.exit(catcher(0))
 
     # Making a source var + support for " and '
-    source = re.sub('[\"\'](.*)[\"\']', '', args.source)
+    source = args.source.replace('[\"\'](.*)[\"\']', '')
 
     # This abomination finds CSV or uses username instead (to create/update data)
     try:
-        file = open(source, 'r', encoding="utf-8")
+        file = open('LICCHART_' + source, 'r', encoding="utf-8")
     except FileNotFoundError:
         try:
-            file = open(source + '.csv', 'r', encoding="utf-8")
+            file = open('LICCHART_' + source + '.csv', 'r', encoding="utf-8")
         except FileNotFoundError:
             user = source
             data = fetch(user, api, 1, None)
@@ -123,7 +131,7 @@ def licchart():
             sys.exit(catcher(data))
 
     # Making CSV file
-    with open(user + '.csv', 'w', encoding="utf-8") as f:
+    with open('LICCHART_' + user + '.csv', 'w', encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerows(data)
 
@@ -172,7 +180,7 @@ def licchart():
     # Generate a chart!!!
     bcr.bar_chart_race(
         df = df,
-        filename = user + '.mp4',
+        filename = 'LICCHART_' + user + '.mp4',
         fig = fig,
         shared_fontdict = {'color': 'white'},
         n_bars = bars,

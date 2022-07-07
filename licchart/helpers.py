@@ -14,7 +14,8 @@ def catcher(code):
         2: "This is not a correct data file",
         3: "Unsupported values",
         4: "API doesn't respond",
-        5: "Invalid API key!\nPlease, set a valid API key with: --api\nYou can get one at: https://www.last.fm/api/account/create"
+        5: "Invalid API key!\nPlease, set a valid API key with: --api\nYou can get one at: https://www.last.fm/api/account/create",
+        6: "Connection failed :("
     }
     try:
         if code in codes:
@@ -36,6 +37,16 @@ def apichecker(rawjson):
         return None
 
 
+# Internet connection checker
+def internetcheck():
+    try:
+        apichecker(getjson(None))
+    except requests.exceptions.ConnectionError:
+        return 6
+    else:
+        return None
+
+
 # Cut the now playing track, return cut version (it sometimes IndexErrors for some reason)
 def cutnowplaying(scrobbles):
     try:
@@ -44,7 +55,6 @@ def cutnowplaying(scrobbles):
         else:
             return scrobbles
     except IndexError:
-
         print('IndexError occured (assuming user is not playing anything?)')
 
 
@@ -102,6 +112,7 @@ def datatodf(data, type):
     katsu = cutlet.Cutlet()
 
     print()
+    print('Pushing scrobbles to DataFrame...')
     for scrobble in data[1:]:
         # Get current scrobble's date and artist
         scrbldate = tstodate(scrobble[0])
@@ -117,13 +128,11 @@ def datatodf(data, type):
         
         # Check if it is time to push a day/month to dataframe
         if datecompare(currentdate, type) != datecompare(scrbldate, type):
-            print('Pushing ' + currentdate.strftime(strftype(type)) + ' to DataFrame')
             df = pd.concat([df, pd.DataFrame(dict, index=[currentdate.strftime(strftype(type))])])
             
             # This is for filling empty days/months (if there are any) with same data
             while datecompare(currentdate + relativedelta(**{type: 1}), type) < datecompare(scrbldate, type):
                 currentdate += relativedelta(**{type: 1})
-                print('Filling ' + currentdate.strftime(strftype(type)))
                 df = pd.concat([df, pd.DataFrame(dict, index=[currentdate.strftime(strftype(type))])])
 
             # Update to a new date as well
@@ -137,15 +146,15 @@ def datatodf(data, type):
 
     # Push final day/month to dataframe (if any data was received)
     try:
-        print('Final push! ' + currentdate.strftime(strftype(type)))
+        df = pd.concat([df, pd.DataFrame(dict, index=[currentdate.strftime(strftype(type))])])
     except UnboundLocalError:
         return 1
-    df = pd.concat([df, pd.DataFrame(dict, index=[currentdate.strftime(strftype(type))])])
 
     # Fill in the NaN and give index a name ^^ owo
     df.fillna(0, inplace=True)
     df.index.name = 'Date'
 
+    print('DataFrame is ready!')
     return df
 
 
