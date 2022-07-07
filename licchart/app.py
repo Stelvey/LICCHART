@@ -9,7 +9,7 @@ import regex as re
 
 def licchart():
     parser = argparse.ArgumentParser(description='A Last.fm Bar Chart Race Maker.', epilog='Visit https://github.com/Stelvey/LICCHART/ for more info.')
-    parser.add_argument('-v', '--version', help='print out current version and exit', action='version', version='LICCHART 0.0.4')
+    parser.add_argument('-v', '--version', help='print out current version and exit', action='version', version='LICCHART 0.0.6')
 
     parser.add_argument('source', help='str: your last.fm username or csv filename', nargs='?')
 
