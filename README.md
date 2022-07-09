@@ -114,7 +114,7 @@ Command above generates a chart that:
 | -a *KEY*, --api *KEY*  | Changes API key and exits  | String | None |
 | -m, --months  |  Takes less time to generate, but gives a less accurate result | None | Yes |
 | -d, --days  | Takes quite a while to generate, but gives a very accurate result  | None | No |
-| -s *DATE*, --strt *DATE* | Sets starting date (month goes first) | Date String | Your first scrobble |
+| -s *DATE*, --start *DATE* | Sets starting date (month goes first) | Date String | Your first scrobble |
 | -e *DATE*, --end *DATE* | Sets ending date (month goes first) | Date String | Your last scrobble |
 | -b *AMOUNT*, --bars *AMOUNT* | Sets how many artists will be visible on the chart | Integer | 20 |
 | -l *MIN*, --length *MIN* | Sets how long your animation will be | Decimal | Dynamic value |

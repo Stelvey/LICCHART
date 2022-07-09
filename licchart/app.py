@@ -9,7 +9,7 @@ import regex as re
 
 def licchart():
     parser = argparse.ArgumentParser(description='A Last.fm Bar Chart Race Maker.', epilog='Visit https://github.com/Stelvey/LICCHART/ for more info.')
-    parser.add_argument('-v', '--version', help='print out current version and exit', action='version', version='LICCHART 0.0.6')
+    parser.add_argument('-v', '--version', help='print out current version and exit', action='version', version='LICCHART 0.0.8')
 
     parser.add_argument('source', help='str: your last.fm username or csv filename', nargs='?')
 
@@ -19,8 +19,8 @@ def licchart():
     group.add_argument('-m', '--months', help='takes less time to generate, but gives a less accurate result (default)', action='store_true')
     group.add_argument('-d', '--days', help='takes quite a while to generate, but gives very accurate result', action='store_true')
 
-    parser.add_argument('-s', '--strt', help='str: set starting date (default: your first scrobble)', metavar='DATE')
-    parser.add_argument('-e', '--end', help='str: set ending date (default: your last scrobble)', metavar='DATE')
+    parser.add_argument('-s', '--start', help='str (month first): set starting date (default: your first scrobble)', metavar='DATE')
+    parser.add_argument('-e', '--end', help='str (month first): set ending date (default: your last scrobble)', metavar='DATE')
 
     parser.add_argument('-b', '--bars', type=int, default=20, help='int: set how many artists will be visible on the chart (default: %(default)s)', metavar='AMT')
     parser.add_argument('-l', '--length', type=float, help='float: set how long your animation will be (default: dynamic value)', metavar='MIN')
