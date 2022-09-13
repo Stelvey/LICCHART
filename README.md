@@ -12,12 +12,12 @@ A CLI tool to make [Last.fm](https://www.last.fm/) bar chart race animations
 
 Make sure you have [Python](https://www.python.org/downloads/) and [pip](https://pip.pypa.io/en/stable/installation/) (use your own package manager!):
 ```
-sudo apt-get install python3
+sudo apt install python3
 ```
 
 Install [ffmpeg](https://www.ffmpeg.org/download.html):
 ```
-sudo apt-get install ffmpeg
+sudo apt install ffmpeg
 ```
 
 Install/update LICCHART:
@@ -69,6 +69,7 @@ Install/update LICCHART:
 pip install --upgrade licchart
 ```
 
+*Please, refer to [troubleshooting](https://github.com/Stelvey/LICCHART#troubleshooting) section at the bottom of this README file if you have difficulties installing*
 *Chances are you can delete Visual C++ / Build Tools after LICCHART was succesfully installed. It hasn't been tested, though. If it doesn't bother you, I suggest leaving it installed*
 
 ## **Setting API key**
@@ -104,7 +105,7 @@ Command above generates a chart that:
 * Shows scrobbles from 06/30/22 til 07/01/22 (`-s 06/30/2022 -e July 1st`)
 * Has 10 artists max (`--bars 10`)
 * Has 60 FPS (`--fps 60`)
-* Lasts 3.5 minutes (`-l 3`)
+* Lasts 3.5 minutes (`-l 3.5`)
 
 ### **List of all optional arguments**
 | Option  | Description | Value type | Default |
