@@ -70,6 +70,7 @@ pip install --upgrade licchart
 ```
 
 *Please, refer to [troubleshooting](https://github.com/Stelvey/LICCHART#troubleshooting) section at the bottom of this README file if you have difficulties installing*
+
 *Chances are you can delete Visual C++ / Build Tools after LICCHART was succesfully installed. It hasn't been tested, though. If it doesn't bother you, I suggest leaving it installed*
 
 ## **Setting API key**
